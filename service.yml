@@ -1,19 +1,12 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: kubepro-deployment
+  name: kubepro-service
 spec:
-  replicas: 3
+  type: LoadBalancer
   selector:
-    matchLabels:
-      app: kubepro
-  template:
-    metadata:
-      labels:
-        app: kubepro
-    spec:
-      containers:
-        - name: kubepro
-          image: vinodhconnects/web234
-          ports:
-            - containerPort: 80
+    app: kubepro
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
